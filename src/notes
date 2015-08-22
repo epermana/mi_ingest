@@ -1,0 +1,126 @@
+UPSERT INTO ADJUST(pk, col2) SELECT pk, 'hardcodedcol2' FROM ADJUST WHERE OBATCH=FBATCH
+
+DELETE FROM STOCK_SYMBOL WHERE SYMBOL IN (SELECT SYMBOL FROM STOCK_SYMBOL WHERE SYMBOL='INTC');
+
+INV TRN
+
+ strQ += " FACILITYID='"+column[0] +"' FCUSTCODE='"+column[5] + " FBDATE='"+column[6] + "FBATCHn  7" "' FSEQUENCE='"+column[8]+"'" +" FTRACK =  9 10'"+column[9] +"'" + "FSERIAL=" +"'"+column[11] +"'"
+            return strQ    
+
+
+select * from PHY_MST where FCUSTCODE='0001987' AND FTRACK ='0313141006' and FSERIAL = '0001';
+
++------------+-------------+-------------+-------------+---------+-------------+---------+----------+-----------------------+-----------------------+---------+----------+---------------------------------+
+| FACILITYID |   ACTION    |  FCUSTCODE  |   OTRACK    | OSERIAL |   FTRACK    | FSERIAL | FRECTYPE |       FPALLETID       |      FCUSTPALID       | FSTATUS | FQUALITY |                   FQTY          |
++------------+-------------+-------------+-------------+---------+-------------+---------+----------+-----------------------+-----------------------+---------+----------+---------------------------------+
+| 0007       | INSERT      | 0001987     |             |         | 0313141006  | 0001    | X        |                       |                       |         |          | 20.0                            |
++------------+-------------+-------------+-------------+---------+-------------+---------+----------+-----------------------+-----------------------+---------+----------+---------------------------------+
+1 row selected (1.672 seconds)
+
+UPSERT INTO PHY_MST VALUES ('0007','UPDATE','0001987','0313141006','0001','0313141006','0001','O',NULL,NULL,NULL,NULL,20,1,0,0,20,1,'0050990071',0,NULL,NULL,NULL,'N',NULL,NULL,TO_DATE('20150630', 'yyyyMMdd'),'03:52','07634',NULL,NULL,NULL,NULL,NULL,NULL,'F',0,NULL,NULL,NULL,NULL,NULL,0,NULL,0,NULL,NULL,'F',NULL,NULL,NULL,'F','F');
+
+
+0: jdbc:phoenix:54.149.221.45:2181> select * from PHY_TRN where FCUSTCODE='0001987' AND FBATCH ='0313141' and FSEQUENCE = '001' AND FTRACK = '0313141001' and FSERIAL= '0001';
++------------+-------------+-------------+----------+-----------+-------------+---------+----------+-----------+-------------+---------+----------+------------------------------------------+-------------+
+| FACILITYID |   ACTION    |  FCUSTCODE  |  OBATCH  | OSEQUENCE |   OTRACK    | OSERIAL |  FBATCH  | FSEQUENCE |   FTRACK    | FSERIAL | FRECTYPE |                   FQTY                   |             |
++------------+-------------+-------------+----------+-----------+-------------+---------+----------+-----------+-------------+---------+----------+------------------------------------------+-------------+
+| 0007       | INSERT      | 0001987     |          |           |             |         | 0313141  | 001       | 0313141001  | 0001    | X        | 162.0                                    | 4.0         |
++------------+-------------+-------------+----------+-----------+-------------+---------+----------+-----------+-------------+---------+----------+------------------------------------------+-------------+
+1 row selected (2.202 seconds)
+
+UPSERT INTO PHY_TRN VALUES ('0007','UPDATE','0001987','0313141','001','0313141001','0001','0313141','001','0313141001','0001','O',162,4,'0050990051',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'07634',TO_DATE('20150630', 'yyyyMMdd'),'03:52',NULL,'F');
+
+
+
+CODE2 CUSTOMER and LOCATION does not get updated
+
+PK key with date type must have NOT NULL
+
+changed DATA_FIXED_WIDTH removed LOG
+and on LOCATION table SEQUENCE should be SEQUENCES cuz reserved words
+STR_TO_DATE functions remove!! on CODE2 CUSTOMER
+MUST USE FUNCTION TO_DATE on phoenix
+queryValues[0] != 'FLOTPO' and queryValues[0] != 'FLOADNUM' and queryValues[0] != 'FSALESORD' and queryValues[0] != 'FPURCHORD' and queryValues[0] != 'FLOTREF' and queryValues[0] != 'FREFERENCE' and queryValues[0] != 'FSORTDATE'
+
+MUSThandles dates 'yyyyMMdd' or the longer one
+
+
+INV_MST INV_TRN type mismatch decimal to varchar 200
+INVMST
+UPSERT INTO INV_MST 
+(FACILITYID,ACTION,OBATCH,OSEQUENCE,FCUSTCODE,FCLASS,FRECTYPE,FBDATE,FSHIPDATE,FSHIPSTAT,FBATCH,FSEQUENCE,FTRACK2,FHOLD,FLOT,FCUSTLOT,FPRODGROUP,FPRODUCT,FOWNER,FSUPLRPROD,FBILLCUST,FO_QTY,FO_GROSWGT,FO_NETWGT,FO_CUBE,FO_PAL,FQTY,FGROSSWGT,FNETWGT,FCUBE,FPAL,FC_QTY,FC_GROSWGT,FC_NETWGT,FC_CUBE,FC_PAL,FOVER,FSHORT,FDAMAGE,FLOTPO,FLOTREF,FUSDANUM,FPACKTYPE,FSUPPLYNUM,FJULIANDTE,FCODEDTE,FSORTDATE,FNOTE,FQTYPERPAL,FTEMPOVER,FRATIO,FBRIX,FISTRANS,FTRANCUST,FPRICECODE,FBREAKCODE,FBREAKFACT,FLASTBILL,FBILLINIT,FBILLHIN,FBILLHOUT,FFINALBILL,FCOMMITBY,FADJUSTBY,FOVERRIDE,FTEMPPOST,FVENDOVRD,FEDILINE,FPICKZONE1,FPICKZONE2,FWHO,FDATESTAMP,FTIMESTAMP,FINUSE,FRS_CUST,FRS_PRICE,FHI_CUST,FHI_PRICE,FHO_CUST,FHO_PRICE,FFI_CUST,FFO_CUST,FF_CHARGE,FF_INTREST,FF_BILLBY,FF_PURCH,FSHELFLIFE,FGROUPCODE,FCANXDOCK,FCOOLCODE,FESTNUM,FMBOL,FSLAUGHDTE,FBBCODEDTE,FBBJULDTE,FLOTOUTPO) VALUES ('0007','INSERT',NULL,NULL,'0002037','LOT','O','20110301',NULL,'N','0238013','002','0238013002','NONE','0228213',NULL,'BF','11213','0002037','11213','0002037','200','6460.000','6000.000','0.000','7','79','2551.700','2370.000','0.000','6','79','2551.700','2370.000','0.000','6','0','0','0','CORRECT LOT','CORRECT LOT',NULL,NULL,NULL,'2011059','20110228',NULL,NULL,'30','0.00','0.00','0.00','Y','0002037','016NA','N/A','1.000','20150627','Y','Y',NULL,'N',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'07187','20110303','15:30',NULL,'0002037','016NA','0002037','016NA','0002037','016NA',NULL,NULL,'0','0',NULL,'0','0',NULL,'F',NULL,'262',NULL,NULL,NULL,NULL,NULL);
+
+
+LOADIN LOADOUT decimal to varchar 0 15
+PHY_MST PHY_TRN type mismatch decimal to varchar 200
+
+     if (table=='ADJUST') or (table=='LOADIN')  or (table=='LOADOUT'):
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,OBATCH,FBATCH,FCUSTCODE) "
+        if (table=='PHY_TRN') :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,FCUSTCODE,OBATCH , OSEQUENCE ,OTRACK,OSERIAL,FBATCH,FSEQUENCE,FTRACK,FSERIAL) "      
+        if (table=='INV_MST'):   
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,OBATCH , OSEQUENCE , FCUSTCODE,FCLASS,FRECTYPE,FBATCH,FSEQUENCE,FTRACK2) "        
+        if (table=='INV_TRN') :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,OBATCH , OSEQUENCE ,OTRACK,FCUSTCODE,FBDATE,FBATCH,FSEQUENCE,FTRACK,FTRACK2 ) "            
+        if (table=='PHY_MST') :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,FCUSTCODE,OTRACK,OSERIAL,FTRACK,FSERIAL) "   
+        if (table=='LOCATION') :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,FLOCATION) " 
+        if (table=='CUSTOMER')   :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,FCUSTCODE) "  
+        if  (table=='CODE2') :
+            strQ += " CONSTRAINT pk PRIMARY KEY (FACILITYID,FPRODUCT) "             
+
+
+if (table=='ADJUST') or (table=='LOADIN')  or (table=='LOADOUT'):
+            strQ += " FACILITYID='"+column[0] +"' FBATCH='"+column[3] + "' FCUSTCODE='"+column[4]+"'"
+            return strQ 
+    if (table=='PHY_TRN') :
+            strQ += " FACILITYID='"+column[0] +"' FCUSTCODE='"+column[2] + "' FBATCH='"+column[7] +"' FSEQUENCE='"+column[8]+"'" +" FTRACK='"+column[9] + "' FSERIAL='"+column[10]+"'" 
+            return strQ 
+    if (table=='INV_MST'):   
+            strQ += " FACILITYID='"+column[0] +"' FCUSTCODE='"+column[4] + "' FCLASS='"+column[5] +"' FRECTYPE='"+column[6]+"'" +" FBATCH='"+column[9] + "' FSEQUENCE='"+column[10]+"'" +" FTRACK2='"+column[9] +"'"
+            return strQ 
+            matrix = [["FACILITYID", "0"],  ["OBATCH", "2"] , ["OSEQUENCE", "3"] , ["FCUSTCODE", "4"],["FCLASS", "5"] ,["FRECTYPE", "6"] ,["FBATCH", "9"] ,["FSEQUENCE", "10"] , ["FTRACK2", "9"] , ["FSERIAL", "11"] ]
+            return matrix      
+    if (table=='INV_TRN') :
+            matrix = [["FACILITYID", "0"],  ["OBATCH", "2"] , ["OSEQUENCE", "3"] , ["OTRACK", "4"] ,["FCUSTCODE", "5"],["FBDATE", "6"] ,["FBATCH", "7"] ,["FSEQUENCE", "8"] , ["FTRACK", "9"] , ["FTRACK2", "10"] ]
+            return matrix           
+    if (table=='PHY_MST') :
+            matrix = [["FACILITYID", "0"], ["FCUSTCODE", "2"], ["OTRACK", "3"] ,["OSERIAL", "4"] , ["FTRACK", "5"] , ["FSERIAL", "6"] ]
+            return matrix  
+    if (table=='LOCATION') : 
+            matrix = [["FACILITYID", "0"],  ["FLOCATION", "2"] ]
+            return matrix
+    if (table=='CUSTOMER')   :
+            matrix = [["FACILITYID", "0"],  ["FCUSTCODE", "2"] ]
+            return matrix
+    if  (table=='CODE2') :
+            matrix = [["FACILITYID", "0"],  ["FPRODUCT", "2"] ]
+            return matrix
+            
+ if (table=='ADJUST') or (table=='LOADIN')  or (table=='LOADOUT'):
+            strQ += sep +"'"+column[0] +"'" + sep + "'"+column[3] + "'"+sep+ "'"+column[4]+"'"
+            return strQ 
+    if (table=='PHY_TRN') :
+            strQ += sep +"'"+column[0] +"'" + sep + "'" +column[2] + "'" +sep+ "'"+ column[7] +"'" +sep+ "'"+column[8]+"'" +sep+ "'"+column[9] +sep+ "'"+column[10]+"'" 
+            return strQ 
+    if (table=='INV_MST'):   
+            strQ += sep +"'"+column[0] +"'" + sep + "'" +column[4] + "'" +sep+ "'"+ column[5] +"'" +sep+ "'"+column[6]+"'" +sep+ "'"+column[9] +sep+ "'"+column[10]+"'" +sep +"'"+column[11]+"'"           
+            return strQ    
+    if (table=='INV_TRN') :
+            strQ += sep +"'"+column[0] +"'" + sep + "'" +column[5] + "'" +sep+ "'"+ column[6] +"'" +sep+ "'"+column[7]+"'" +sep+ "'"+column[8] +sep+ "'"+column[9]+"'" +sep +"'"+column[10]+"'"
+            return strQ 
+    if (table=='PHY_MST') :
+            strQ += sep +"'"+column[0] +"'" + sep + "'" +column[2] + "'" +sep+ "'"+ column[5] +"'" +sep+ "'"+column[6]+"'"
+            return strQ                
+    if (table=='LOCATION') :
+            strQ += sep +"'"+column[0] +"'" + sep + "'"+column[2] + "'"
+            return strQ  
+    if (table=='CUSTOMER')   :
+            strQ += sep +"'"+column[0] +"'" + sep + "'"+column[2] + "'"
+            return strQ  
+    if  (table=='CODE2') :
+            strQ += sep +"'"+column[0] +"'" + sep + "'"+column[2] + "'"
+            return strQ  
+

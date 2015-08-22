@@ -1,0 +1,232 @@
+okay Questions on delete must matched all keys below
+
+BUT the ACTION marked as delete instead of the previous rows keys which is INSERT or update
+
+0007DELETE    031329203132920001987   20150701                                                                                                     P             P             F
+
+INV_MST
+(FACILITYID,OBATCH , OSEQUENCE , FCUSTCODE,FCLASS,FRECTYPE,FBATCH,FSEQUENCE,FTRACK2) "        
+       
+
+>> Customer would use the customer code FCUSTCODE, FACILITYID
+>>
+>>  
+>>
+>> Code2 would use FCUSTCODE, FPRODUCT, FACILITYID
+>>
+>>  
+>>
+>> LOCATION would use FACILITYID, FLOCATION
+>>
+>>  
+>>
+>> All other tables have “O” keys, not just batch and sequence, but other keys that also are present
+>>
+>>  
+>>
+>> ************
+>>
+>> ADJUST_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> OBATCH          C                7
+>>
+>> FBATCH          C                7
+>>
+>> FCUSTCODE       C               10
+>>
+>>  
+>>
+>>  
+>>
+>> ************
+>>
+>> LOADOUT_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> OBATCH          C                7
+>>
+>> FBATCH          C                7
+>>
+>> FCUSTCODE       C               10
+>>
+>>  
+>>
+>> PHY_MST_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> FCUSTCODE       C               10
+>>
+>> OTRACK          C               10
+>>
+>> OSERIAL         C                4
+>>
+>> FTRACK          C               10
+>>
+>> FSERIAL         C                4
+>>
+>>  
+>>
+>> PHY_TRN_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> FCUSTCODE       C               10
+>>
+>> OBATCH          C                7
+>>
+>> OSEQUENCE       C                3
+>>
+>> OTRACK          C               10
+>>
+>> OSERIAL         C                4
+>>
+>> FBATCH          C                7
+>>
+>> FSEQUENCE       C                3
+>>
+>> FTRACK          C               10
+>>
+>> FSERIAL         C                4
+>>
+>>  
+>>
+>> ************
+>>
+>> LOADIN_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> OBATCH          C                7
+>>
+>> FBATCH          C                7
+>>
+>> FCUSTCODE       C               10
+>>
+>>  
+>>
+>> INV_MST_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> OBATCH          C                7
+>>
+>> OSEQUENCE       C                3
+>>
+>> FCUSTCODE       C               10
+>>
+>> FCLASS          C                5
+>>
+>> FRECTYPE        C                1
+>>
+>> FBDATE          D                8
+>>
+>> FSHIPDATE       D       
+>>
+>>  
+>>
+>>  
+>>
+>> ************
+>>
+>> INV_TRN_LOG
+>>
+>> ************
+>>
+>>  
+>>
+>> FACILITYID      C                4
+>>
+>> ACTION          C               10
+>>
+>> OBATCH          C                7
+>>
+>> OSEQUENCE       C                3
+>>
+>> OTRACK          C               10
+>>
+>> FCUSTCODE       C               10
+>>
+>> FBDATE          D                8
+>>
+>> FBATCH          C                7
+>>
+>> FSEQUENCE       C                3
+>>
+>> FTRACK          C               10       8
+>>
+>> FSHIPSTAT       C                1
+>>
+>> FBATCH          C                7
+>>
+>> FSEQUENCE       C                3
+>>
+>> FTRACK2         C               10
+>>
+>>  
+
+--------------------
+>> LOADIN   FBATCH   CONSTRAINT pk PRIMARY KEY (FBATCH) 
+>>
+>> LOADOUT  FBATCH
+>>
+>> ADJUST FBATCH
+
+>>
+>> INV_TRN  FBATCH + FSEQUENCE
+>>
+>> PHY_TRN  FBATCH + FSEQUENCE
+
+>> INV_MST  FBATCH + FSEQUENCE
+
+
+>> PHY_MST  FTRACK + FSERIAL
+>>
+
+>>
+>> CUSTOMER FCUSTCODE 
+>>
+>> CODE2    FCUSTCODE 
+>>
+>> LOCATION FLOCATION 
+>>
+
